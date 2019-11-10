@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import static robot.Constants.Wrist.*;
 import static robot.Ports.Wrist.MOTOR;
 
+/**
+ * Wrist subsystem, currently built for mechanics prototype
+ */
 public class Wrist extends Subsystem {
     private TalonSRX armMotor = new TalonSRX(MOTOR);
     private double angle;
@@ -19,37 +22,46 @@ public class Wrist extends Subsystem {
     }
 
     /**
-     * @return the current angle of the mechanism.
+     * @return the encoder angle of the wrist in degrees, clockwise.
      */
     public double getAngle() {
         return convertTicksToDegrees(armMotor.getSelectedSensorPosition());
     }
 
+    /**
+     * Set the target angle of the wrist
+     * @param angle angle in degrees, clockwise.
+     */
     public void setAngle(double angle) {
         this.angle = angle;
     }
 
     /**
-     * Update the angle of the mechanism to the desired angle.
+     * Update the talon to power the motor based on the target angle and current angle
      */
     public void update() {
-        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbPercent(0));
+        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbitraryPercent(0));
     }
 
     /**
-     * Reset the mechanism angle to 0.
+     * Reset the angle of the wrist, incase it jumps or becomes inaccurate.
      */
     public void reset() {
 
     }
 
     /**
-     * Set the percent output of the motor.
+     * Set the percent output of the motor, without control.
      */
     public void setPercent() {
     }
 
-    private double getArbPercent(double angle){return 0;}
+    /**
+     * The arbitrary percent output needed to hold the wrist in place
+     * @param angle
+     * @return
+     */
+    private double getArbitraryPercent(double angle){return 0;}
 
     public double convertTicksToDegrees(double ticks) {
         return ticks / TICKS_PER_DEGREE;
