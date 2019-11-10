@@ -14,7 +14,9 @@ public class Wrist extends Subsystem {
         armMotor.config_kI(TALON_PID_SLOT, KI, TALON_TIMEOUT_MS);
         armMotor.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT_MS);
     }
-        
+
+    public double ConvertTicksToDegrees(double degrees) {
+        return Math.toRadians(degrees) * TICKS_PER_DEGREE;
     }
 
     @Override
