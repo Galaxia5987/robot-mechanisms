@@ -15,9 +15,26 @@ public class Wrist extends Subsystem {
         armMotor.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT_MS);
     }
 
+    public void setAngle(double degrees) {
+
+    }
+
+    public void getAngle(){}
+
+    public void update(){}
+
+    public void reset(){}
+
+    public void setPercent(){}
+
     public double ConvertTicksToDegrees(double degrees) {
         return Math.toRadians(degrees) * TICKS_PER_DEGREE;
     }
+
+    public double ConvertDegreesToTicks(double degrees){
+        return 0;
+    }
+
 
     @Override
     protected void initDefaultCommand() {
