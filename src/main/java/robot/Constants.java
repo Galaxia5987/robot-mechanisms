@@ -18,8 +18,8 @@ public class Constants {
         public static final int MAX_CURRENT = 35;
     }
 
-    public static class Wrist{}
-    
+    public static class Wrist {}
+
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.
 
