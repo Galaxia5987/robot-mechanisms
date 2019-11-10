@@ -10,6 +10,7 @@ import static robot.Ports.Wrist.MOTOR;
 
 public class Wrist extends Subsystem {
     private TalonSRX armMotor = new TalonSRX(MOTOR);
+    private double angle;
 
     public Wrist() {
         armMotor.config_kP(TALON_PID_SLOT, KP, TALON_TIMEOUT_MS);
@@ -25,19 +26,21 @@ public class Wrist extends Subsystem {
     }
 
     public void setAngle(double angle) {
-        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbPercent());
+        this.angle = angle;
     }
 
     /**
      * Update the angle of the mechanism to the desired angle.
      */
     public void update() {
+        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbPercent(0));
     }
 
     /**
      * Reset the mechanism angle to 0.
      */
     public void reset() {
+
     }
 
     /**
