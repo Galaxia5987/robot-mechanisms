@@ -19,12 +19,25 @@ public class Wrist extends Subsystem {
 
     }
 
-    public void getAngle(){}
+    /**
+     *
+     * @return the current angle of the mechanism.
+     */
+    public double getAngle(){return 0;}
 
+    /**
+     * Update the angle of the mechanism to the desired angle.
+     */
     public void update(){}
 
+    /**
+     * Reset the mechanism angle to 0.
+     */
     public void reset(){}
 
+    /**
+     * Set the percent output of the motor.
+     */
     public void setPercent(){}
 
     public double ConvertTicksToDegrees(double degrees) {
