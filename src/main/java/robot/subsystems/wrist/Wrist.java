@@ -15,37 +15,41 @@ public class Wrist extends Subsystem {
         armMotor.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT_MS);
     }
 
+    /**
+     * @return the current angle of the mechanism.
+     */
+    public double getAngle() {
+        return 0;
+    }
+
     public void setAngle(double degrees) {
 
     }
 
     /**
-     *
-     * @return the current angle of the mechanism.
-     */
-    public double getAngle(){return 0;}
-
-    /**
      * Update the angle of the mechanism to the desired angle.
      */
-    public void update(){}
+    public void update() {
+    }
 
     /**
      * Reset the mechanism angle to 0.
      */
-    public void reset(){}
+    public void reset() {
+    }
 
     /**
      * Set the percent output of the motor.
      */
-    public void setPercent(){}
-
-    public double ConvertTicksToDegrees(double degrees) {
-        return Math.toRadians(degrees) * TICKS_PER_DEGREE;
+    public void setPercent() {
     }
 
-    public double ConvertDegreesToTicks(double degrees){
-        return 0;
+    public double ConvertTicksToDegrees(double ticks) {
+        return ticks / TICKS_PER_DEGREE;
+    }
+
+    public double ConvertDegreesToTicks(double angle) {
+        return angle * TICKS_PER_DEGREE;
     }
 
 
