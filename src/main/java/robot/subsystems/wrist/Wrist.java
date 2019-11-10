@@ -46,11 +46,13 @@ public class Wrist extends Subsystem {
     public void setPercent() {
     }
 
-    public double ConvertTicksToDegrees(double ticks) {
+    private double getArbPercent(double angle){return 0;}
+
+    public double convertTicksToDegrees(double ticks) {
         return ticks / TICKS_PER_DEGREE;
     }
 
-    public double ConvertDegreesToTicks(double angle) {
+    public double convertDegreesToTicks(double angle) {
         return angle * TICKS_PER_DEGREE;
     }
 
