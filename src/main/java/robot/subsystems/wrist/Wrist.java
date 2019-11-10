@@ -1,5 +1,7 @@
 package robot.subsystems.wrist;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,11 +21,11 @@ public class Wrist extends Subsystem {
      * @return the current angle of the mechanism.
      */
     public double getAngle() {
-        return 0;
+        return convertTicksToDegrees(armMotor.getSelectedSensorPosition());
     }
 
-    public void setAngle(double degrees) {
-
+    public void setAngle(double angle) {
+        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbPercent());
     }
 
     /**
