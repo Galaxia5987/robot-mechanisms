@@ -30,6 +30,7 @@ public class Wrist extends Subsystem {
 
     /**
      * Set the target angle of the wrist
+     *
      * @param angle angle in degrees, clockwise.
      */
     public void setAngle(double angle) {
@@ -40,24 +41,27 @@ public class Wrist extends Subsystem {
      * Update the talon to power the motor based on the target angle and current angle
      */
     public void update() {
-        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbitraryPercent(0));
+        armMotor.set(ControlMode.MotionMagic, convertDegreesToTicks(angle), DemandType.ArbitraryFeedForward, getArbitraryPercent(angle));
     }
 
     /**
-     * Reset the angle of the wrist, incase it jumps or becomes inaccurate.
+     * Reset the angle of the wrist, in case it jumps or becomes inaccurate.
      */
     public void reset() {
-
+        setAngle(0);
+        update();
     }
 
     /**
      * Set the percent output of the motor, without control.
      */
-    public void setPercent() {
+    public void setPercent(double angle) {
+        armMotor.set(ControlMode.PercentOutput, convertDegreesToTicks(angle));
     }
 
     /**
      * The arbitrary percent output needed to hold the wrist in place
+     *
      * @param angle
      * @return
      */
