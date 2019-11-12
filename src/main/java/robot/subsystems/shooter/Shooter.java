@@ -1,7 +1,7 @@
 package robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import static robot.Constants.Shooter.*;
@@ -9,7 +9,7 @@ import static robot.Ports.Shooter.*;
 
 public class Shooter extends Subsystem {
     private TalonSRX shooterMaster = new TalonSRX(TALON);
-    private VictorSP shooterSlave = new VictorSP(SLAVE);
+    private VictorSPX shooterSlave = new VictorSPX(SLAVE);
 
     public Shooter() {
         shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
