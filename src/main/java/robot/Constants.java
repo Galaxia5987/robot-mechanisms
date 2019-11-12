@@ -25,6 +25,9 @@ public class Constants {
         public static final double KI = 0;
         public static final double KD = 0;
         public static final int TALON_TIMEOUT_MS = 20;
+        public static final double GRAVITY = 9.8;
+        public static final double MASS  = 2; //in kilograms TODO: CHANGE VALUE
+        public static int WRIST_LENGTH = 0;
     }
 
     public static class ExampleSubsystem1 {
