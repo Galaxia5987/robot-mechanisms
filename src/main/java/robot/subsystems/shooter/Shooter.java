@@ -32,6 +32,12 @@ public class Shooter extends Subsystem {
 
     public void getSpeed(){
 
+    /**
+     *
+     * @param speed
+     */
+    private void setSpeed(double speed) {
+        shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
     }
 
     @Override
