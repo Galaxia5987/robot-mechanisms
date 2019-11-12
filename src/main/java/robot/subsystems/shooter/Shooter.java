@@ -26,6 +26,7 @@ public class Shooter extends Subsystem {
     }
 
     public void setSpeed(){
+    public void setShootingDistance(double distance) {
 
     }
 
