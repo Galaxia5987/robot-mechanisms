@@ -15,6 +15,8 @@ public class Shooter extends Subsystem {
         shooterMotor.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
         shooterMotor.config_kI(TALON_PID_SLOT, KP, TIMEOUT_MS);
         shooterMotor.config_kD(TALON_PID_SLOT, KP, TIMEOUT_MS);
+        shooterMotor.setInverted(IS_MASTER_INVERTED);
+        shooterSlave.setInverted(IS_SLAVE_INVERTED);
     }
 
     public void setSpeed(){
