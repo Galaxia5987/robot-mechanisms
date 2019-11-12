@@ -28,6 +28,7 @@ public class Constants {
         public static final double GRAVITY = 9.8;
         public static final double MASS  = 2; //in kilograms TODO: CHANGE VALUE
         public static int WRIST_LENGTH = 0;
+        public static double THERSHOLD = 0;
     }
 
     public static class ExampleSubsystem1 {
