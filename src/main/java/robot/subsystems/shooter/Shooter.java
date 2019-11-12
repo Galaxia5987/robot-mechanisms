@@ -21,6 +21,8 @@ public class Shooter extends Subsystem {
         shooterMaster.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
         shooterMaster.setInverted(IS_MASTER_INVERTED);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
+        shooterMaster.configPeakCurrentLimit(MAX_CURRENT);
+        // TODO: Configure peak and nominal outputs, if needed
     }
 
     public void setSpeed(){
