@@ -6,7 +6,8 @@ package robot;
  * When accessing a mechanism-specific port, call Ports.[MECHANISM].[PORT_NAME]
  */
 public class Ports {
-    public static class ExampleSubsystem1 {
-        //public static int TALON_PORT = 1;
+    public static class Shooter {
+        public static final int TALON = 1;
+        public static final int SLAVE = 2;
     }
 }
