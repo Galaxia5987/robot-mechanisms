@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import robot.subsystems.drivetrain.Drivetrain;
+import robot.subsystems.wrist.Wrist;
 
 
 /**
@@ -26,7 +27,7 @@ public class Robot extends TimedRobot {
     public static final Drivetrain m_drivetrain = new Drivetrain();
     //public static final Elevator m_elevator = new Elevator();
     public static RobotContainer m_robotContainer;
-
+    public static Wrist wrist = new Wrist();
     Command m_autonomousCommand;
 
     /**
