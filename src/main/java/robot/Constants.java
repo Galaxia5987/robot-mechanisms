@@ -27,6 +27,7 @@ public class Constants {
         public static final int TIMEOUT_MS= 0;
         public static final boolean IS_MASTER_INVERTED = false;
         public static final boolean IS_SLAVE_INVERTED = false;
+        public static final int MAX_CURRENT = 35;
     }
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.
