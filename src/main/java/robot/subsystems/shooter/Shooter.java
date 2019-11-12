@@ -30,7 +30,9 @@ public class Shooter extends Subsystem {
 
     }
 
-    public void getSpeed(){
+    public double getSpeed() {
+        return shooterMaster.getSelectedSensorVelocity();
+    }
 
     /**
      *
