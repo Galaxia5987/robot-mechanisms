@@ -1,5 +1,7 @@
 package robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,7 +27,10 @@ public class Shooter extends Subsystem {
         // TODO: Configure peak and nominal outputs, if needed
     }
 
-    public void setSpeed(){
+    /**
+     * Set how far the bin/target is from the robot; The vertical distance the ball should travel
+     * @param distance in meters
+     */
     public void setShootingDistance(double distance) {
 
     }
