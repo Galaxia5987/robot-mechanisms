@@ -2,14 +2,17 @@ package robot.subsystems.wrist.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import static robot.Robot.wrist;
+
 /**
  *
  */
 public class MoveWrist extends Command {
+    private double angle;
 
-    public MoveWrist() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public MoveWrist(double angle) {
+        requires(wrist);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
