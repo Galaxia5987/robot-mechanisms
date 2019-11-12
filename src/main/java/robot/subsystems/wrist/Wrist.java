@@ -65,7 +65,9 @@ public class Wrist extends Subsystem {
      * @param angle
      * @return
      */
-    private double getArbitraryPercent(double angle){return 0;}
+    private double getArbitraryPercent(double angle) {
+        return Math.cos(angle) * MASS * GRAVITY * WRIST_LENGTH;
+    }
 
     public double convertTicksToDegrees(double ticks) {
         return ticks / TICKS_PER_DEGREE;
