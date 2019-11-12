@@ -2,6 +2,7 @@ package robot.subsystems.wrist.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import static robot.Constants.Wrist.*;
 import static robot.Robot.wrist;
 
 /**
@@ -26,7 +27,7 @@ public class MoveWrist extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(angle - wrist.getAngle()) < THERSHOLD;
     }
 
     // Called once after isFinished returns true
