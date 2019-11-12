@@ -8,14 +8,18 @@ import static robot.Constants.Shooter.*;
 import static robot.Ports.Shooter.*;
 
 public class Shooter extends Subsystem {
-    private TalonSRX shooterMotor = new TalonSRX(TALON);
+    private TalonSRX shooterMaster = new TalonSRX(TALON);
     private VictorSP shooterSlave = new VictorSP(SLAVE);
 
     public Shooter() {
         shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
         shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER);
-        shooterMotor.config_kD(TALON_PID_SLOT, KP, TIMEOUT_MS);
-        shooterMotor.setInverted(IS_MASTER_INVERTED);
+        shooterSlave.follow(shooterMaster);
+        shooterMaster.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
+        shooterMaster.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
+        shooterMaster.config_kD(TALON_PID_SLOT, KD, TIMEOUT_MS);
+        shooterMaster.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
+        shooterMaster.setInverted(IS_MASTER_INVERTED);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
     }
 
