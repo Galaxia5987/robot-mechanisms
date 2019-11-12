@@ -12,8 +12,8 @@ public class Shooter extends Subsystem {
     private VictorSP shooterSlave = new VictorSP(SLAVE);
 
     public Shooter() {
-        shooterMotor.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
-        shooterMotor.config_kI(TALON_PID_SLOT, KP, TIMEOUT_MS);
+        shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
+        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER);
         shooterMotor.config_kD(TALON_PID_SLOT, KP, TIMEOUT_MS);
         shooterMotor.setInverted(IS_MASTER_INVERTED);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
