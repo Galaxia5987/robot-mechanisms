@@ -11,7 +11,14 @@ public class Shooter extends Subsystem {
     private VictorSP shooterSlave = new VictorSP(SLAVE);
 
     public Shooter() {
-        shooterSlave.follow(shooterMotor);
+        shooterMotor.config_kP();
+        shooterMotor.config_kI();
+        shooterMotor.config_kD();
+    }
+
+
+
+
     }
 
     @Override
