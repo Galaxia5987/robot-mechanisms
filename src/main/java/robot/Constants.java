@@ -18,7 +18,13 @@ public class Constants {
         public static final int MAX_CURRENT = 35;
     }
 
-
+    public static class Shooter {
+        public static final int TALON_PID_SLOT = 0;
+        public static final double KP = 0;
+        public static final double KI = 0;
+        public static final double KD = 0;
+        public static final int TIMEOUT_MS= 0;
+    }
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.
 
