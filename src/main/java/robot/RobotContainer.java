@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.drivetrain.commands.DriveStraight;
+import robot.subsystems.shooter.commands.Shoot;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,7 +31,7 @@ public class RobotContainer {
 
     public RobotContainer(){
         configureButtonBindings();
-
+        x.whileHeld(new Shoot(3.5));
         //m_chooser.addOption("Example Auto 1", new DriveStraight());
         //m_chooser.addOption("Example Auto 2", new ExampleCommand());
         //m_chooser.setDefaultOption();
@@ -52,6 +53,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return m_chooser.getSelected();
+        return new Shoot(3.5, 3.5);
     }
 }
