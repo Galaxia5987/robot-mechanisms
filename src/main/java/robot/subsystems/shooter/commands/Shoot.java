@@ -47,7 +47,7 @@ public class Shoot extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return timeout > 0 || timer.get() >= timeout;
+        return timeout > 0 && timer.get() >= timeout;
     }
 
     // Called once after isFinished returns true
