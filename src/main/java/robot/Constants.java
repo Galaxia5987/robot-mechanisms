@@ -31,6 +31,7 @@ public class Constants {
         public static final double TICKS_PER_METER = 256 / (4 * 0.0254 * Math.PI);
         public static final double HEIGHT= 0;
         public static final double ANGLE  = 0;
+        public static final double RADIUS = 0;
     }
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.
