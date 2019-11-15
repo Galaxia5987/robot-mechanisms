@@ -40,14 +40,14 @@ public class Shoot extends Command {
 
     private double calculateInitialVelocity(double distance) {
         double numerator = Math.pow(distance, 2) * 10;
-        double denominator = distance * Math.sin(2 * ANGLE) - 2 * HEIGHT * Math.pow(Math.cos(ANGLE), 2);
+        double denominator = distance * Math.sin(2 * ANGLE) - 2 * HEIGHT * Math.pow(Math.cos(ANGLE), 2); //https://en.wikipedia.org/wiki/Projectile_motion#Displacement
         return Math.sqrt(numerator / denominator);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return timer.get() >= timeout;
+        return timeout > 0 || timer.get() >= timeout;
     }
 
     // Called once after isFinished returns true
