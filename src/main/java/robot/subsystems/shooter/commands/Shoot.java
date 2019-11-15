@@ -3,6 +3,7 @@ package robot.subsystems.shooter.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
+import static robot.Constants.Shooter.*;
 import static robot.Robot.shooter;
 
 /**
@@ -33,7 +34,14 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        shooter.setSpeed();
+        shooter.setSpeed(calculateInitialVelocity());
+    }
+
+    //https://en.wikipedia.org/wiki/Projectile_motion#Displacement
+    private double calculateInitialVelocity() {
+        double numerator = Math.pow(distance, 2) * 10;
+        double denominator = distance * Math.sin(2 * ANGLE) - 2 * HEIGHT * Math.pow(Math.cos(ANGLE), 2);
+        return Math.sqrt(numerator / denominator);
     }
 
     // Make this return true when this Command no longer needs to run execute()
