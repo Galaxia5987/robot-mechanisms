@@ -34,11 +34,11 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        shooter.setSpeed(calculateInitialVelocity());
+        shooter.setSpeed(calculateInitialVelocity(distance) / RADIUS);
     }
 
-    //https://en.wikipedia.org/wiki/Projectile_motion#Displacement
-    private double calculateInitialVelocity() {
+
+    private double calculateInitialVelocity(double distance) {
         double numerator = Math.pow(distance, 2) * 10;
         double denominator = distance * Math.sin(2 * ANGLE) - 2 * HEIGHT * Math.pow(Math.cos(ANGLE), 2);
         return Math.sqrt(numerator / denominator);
