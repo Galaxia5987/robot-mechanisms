@@ -10,7 +10,7 @@ import static robot.Constants.Shooter.*;
 import static robot.Ports.Shooter.*;
 
 public class Shooter extends Subsystem {
-    private TalonSRX shooterMaster = new TalonSRX(TALON);
+    private TalonSRX shooterMaster = new TalonSRX(MASTER);
     private VictorSPX shooterSlave = new VictorSPX(SLAVE);
 
     public Shooter() {
