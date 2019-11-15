@@ -33,6 +33,8 @@ public class Constants {
         public static final double ANGLE  = 0; // [deg]
         public static final double RADIUS = 0; // [m]
         public static final double g = 9.80665; // [m/sec^2]
+        public static final double TARGET_DISTANCE = 3.5;
+        public static final double SHOOTING_TIME = 3.5;
     }
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.

@@ -17,6 +17,8 @@ import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.drivetrain.commands.DriveStraight;
 import robot.subsystems.shooter.commands.Shoot;
 
+import static robot.Constants.Shooter.*;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -31,7 +33,7 @@ public class RobotContainer {
 
     public RobotContainer(){
         configureButtonBindings();
-        x.whileHeld(new Shoot(3.5));
+        x.whileHeld(new Shoot(TARGET_DISTANCE));
         //m_chooser.addOption("Example Auto 1", new DriveStraight());
         //m_chooser.addOption("Example Auto 2", new ExampleCommand());
         //m_chooser.setDefaultOption();
@@ -53,6 +55,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return new Shoot(3.5, 3.5);
+        return new Shoot(TARGET_DISTANCE, SHOOTING_TIME);
     }
 }
