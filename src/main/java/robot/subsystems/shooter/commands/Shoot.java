@@ -40,7 +40,7 @@ public class Shoot extends Command {
 
     private double calculateInitialVelocity(double distance) {
         double numerator = Math.pow(distance, 2) * 10;
-        double denominator = distance * Math.sin(2 * ANGLE) - 2 * HEIGHT * Math.pow(Math.cos(ANGLE), 2); //https://en.wikipedia.org/wiki/Projectile_motion#Displacement
+        double denominator = distance * Math.sin(2 * Math.toRadians(ANGLE)) - 2 * HEIGHT * Math.pow(Math.cos(Math.toRadians(ANGLE)), 2); // https://en.wikipedia.org/wiki/Projectile_motion#Displacement
         return Math.sqrt(numerator / denominator);
     }
 
