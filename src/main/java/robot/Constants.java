@@ -27,11 +27,11 @@ public class Constants {
         public static final int TIMEOUT_MS= 0;
         public static final boolean IS_MASTER_INVERTED = false;
         public static final boolean IS_SLAVE_INVERTED = false;
-        public static final int MAX_CURRENT = 35;
+        public static final int MAX_CURRENT = 35; //[A]
         public static final double TICKS_PER_METER = 256 / (4 * 0.0254 * Math.PI);
-        public static final double HEIGHT= 0;
-        public static final double ANGLE  = 0;
-        public static final double RADIUS = 0;
+        public static final double HEIGHT= 0; // [m]
+        public static final double ANGLE  = 0; // [deg]
+        public static final double RADIUS = 0; // [m]
     }
     public static class ExampleSubsystem1 {
         //All of the Subsystem specific constants go here,and need to be static.
