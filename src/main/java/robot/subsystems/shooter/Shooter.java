@@ -28,7 +28,7 @@ public class Shooter extends Subsystem {
     }
 
     public double getSpeed() {
-        return ConvertTicksToMeters(shooterMaster.getSelectedSensorVelocity()) * 10;
+        return shooterMaster.getSelectedSensorVelocity() * 10;
     }
 
     /**
@@ -37,10 +37,6 @@ public class Shooter extends Subsystem {
      */
     public void setSpeed(double speed) {
         shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
-    }
-
-    public double ConvertTicksToMeters(double ticks){
-        return ticks / TICKS_PER_METER;
     }
 
     @Override
