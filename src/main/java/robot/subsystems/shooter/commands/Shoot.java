@@ -34,7 +34,7 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        shooter.setSpeed(calculateInitialVelocity(distance) / RADIUS);
+        shooter.setSpeed(calculateInitialVelocity(distance) / RADIUS); // Convert from linear velocity to radial velocity: v = wr.
     }
 
 
