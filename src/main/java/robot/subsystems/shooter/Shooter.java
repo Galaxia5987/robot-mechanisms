@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import robot.Constants;
 
 import static robot.Constants.Shooter.*;
 import static robot.Ports.Shooter.*;
@@ -24,11 +25,12 @@ public class Shooter extends Subsystem {
         shooterMaster.setInverted(IS_MASTER_INVERTED);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
         shooterMaster.configPeakCurrentLimit(MAX_CURRENT);
+        shooterMaster.setSelectedSensorPosition(0);
         // TODO: Configure peak and nominal outputs, if needed
     }
 
     public double getSpeed() {
-        return shooterMaster.getSelectedSensorVelocity() * 10;
+        return shooterMaster.getSelectedSensorVelocity()*10 / TICKS_PER_METER;
     }
 
     /**
@@ -36,7 +38,10 @@ public class Shooter extends Subsystem {
      * @param speed
      */
     public void setSpeed(double speed) {
-        shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
+        shooterMaster.set(ControlMode.Velocity, 5* TICKS_PER_METER); // TODO: Convert between m/s to native sensor units/100ms
+    }
+    public double getPosition(){
+        return shooterMaster.getSelectedSensorPosition();
     }
 
     @Override
