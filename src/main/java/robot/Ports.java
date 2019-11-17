@@ -7,7 +7,7 @@ package robot;
  */
 public class Ports {
     public static class Shooter {
-        public static final int MASTER = 1;
-        public static final int SLAVE = 2;
+        public static final int MASTER = 11;
+        public static final int SLAVE = 12;
     }
 }
