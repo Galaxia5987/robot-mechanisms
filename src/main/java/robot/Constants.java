@@ -20,9 +20,9 @@ public class Constants {
 
     public static class Shooter {
         public static final int TALON_PID_SLOT = 0;
-        public static final double KP = 0.5;
+        public static final double KP = .57;
         public static final double KI = 0;
-        public static final double KD = 0;
+        public static final double KD = 0.31;
         public static final double KF = 0;
         public static final int TIMEOUT_MS = 20;
         public static final boolean IS_MASTER_INVERTED = true;
@@ -34,7 +34,7 @@ public class Constants {
         public static final double ANGLE = 45; // [deg]
         public static final double RADIUS = 0.05; // [m]
         public static final double g = 9.80665; // [m/sec^2]
-        public static final double TARGET_DISTANCE = 2;
+        public static final double TARGET_DISTANCE = 1;
         public static final double SHOOTING_TIME = 3.5;
     }
 

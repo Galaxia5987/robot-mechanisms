@@ -2,7 +2,6 @@ package robot.subsystems.shooter.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static robot.Constants.Shooter.*;
 import static robot.Robot.shooter;
@@ -35,7 +34,8 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS)*TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
+       // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
+        shooter.setSpeed(100);
         System.out.println(shooter.getSpeed());
 //        System.out.println(shooter.getPosition());
     }

@@ -5,10 +5,10 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import robot.Constants;
 
 import static robot.Constants.Shooter.*;
-import static robot.Ports.Shooter.*;
+import static robot.Ports.Shooter.MASTER;
+import static robot.Ports.Shooter.SLAVE;
 
 public class Shooter extends Subsystem {
     private TalonSRX shooterMaster = new TalonSRX(MASTER);
@@ -16,7 +16,7 @@ public class Shooter extends Subsystem {
 
     public Shooter() {
         shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
-        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER);
+        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER / TICKS_PER_METER); // TODO: Revert
         shooterSlave.follow(shooterMaster);
         shooterMaster.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
         shooterMaster.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
@@ -30,17 +30,17 @@ public class Shooter extends Subsystem {
     }
 
     public double getSpeed() {
-        return shooterMaster.getSelectedSensorVelocity()*10 / TICKS_PER_METER;
+        return shooterMaster.getSelectedSensorVelocity() * 10;
     }
 
     /**
-     *
      * @param speed
      */
     public void setSpeed(double speed) {
-        shooterMaster.set(ControlMode.Velocity, 5* TICKS_PER_METER); // TODO: Convert between m/s to native sensor units/100ms
+        shooterMaster.set(ControlMode.Velocity, speed * 10); // TODO: Convert between m/s to native sensor units/100ms
     }
-    public double getPosition(){
+
+    public double getPosition() {
         return shooterMaster.getSelectedSensorPosition();
     }
 
