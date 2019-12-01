@@ -18,12 +18,12 @@ public class Drivetrain extends Subsystem {
     public VictorSPX left2 = new VictorSPX(15);
 
     public Drivetrain() {
-        leftMaster.setInverted(true);
-        left1.setInverted(true);
-        left2.setInverted(true);
+        leftMaster.setInverted(false);
+        left1.setInverted(false);
+        left2.setInverted(false);
         rightMaster.setInverted(false);
         right1.setInverted(false);
-        right2.setInverted(false);
+        right2.setInverted(true);
 
         right1.follow(rightMaster);
         right2.follow(rightMaster);
