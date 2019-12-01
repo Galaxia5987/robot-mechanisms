@@ -4,7 +4,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static robot.Constants.Shooter.*;
 import static robot.Robot.shooter;
 import static robot.Robot.shooterTable;
 
@@ -37,9 +36,9 @@ public class Shoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-       // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
-        shooter.setSpeed(2100);
-        System.out.println(shooter.getSpeed());
+        // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
+        shooter.setSpeed(calculateVelocity(distance));
+        System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
         setNetworkTable();
 //        System.out.println(shooter.getPosition());
     }
@@ -47,10 +46,9 @@ public class Shoot extends Command {
     private void setNetworkTable() {
         velocityEntry.setDouble(shooter.getSpeed());
     }
-    private double calculateInitialVelocity(double distance) {
-        double numerator = Math.pow(distance, 2) * g;
-        double denominator = distance * Math.sin(2 * Math.toRadians(ANGLE)) - 2 * HEIGHT * Math.pow(Math.cos(Math.toRadians(ANGLE)), 2); // https://en.wikipedia.org/wiki/Projectile_motion#Displacement
-        return Math.sqrt(numerator / denominator);
+
+    private double calculateVelocity(double distance) {
+        return (458.22 * Math.exp(0.2559 * distance)) * (4.0 / 5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
