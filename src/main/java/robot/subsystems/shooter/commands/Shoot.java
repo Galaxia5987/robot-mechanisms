@@ -1,10 +1,12 @@
 package robot.subsystems.shooter.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static robot.Constants.Shooter.*;
 import static robot.Robot.shooter;
+import static robot.Robot.shooterTable;
 
 /**
  *
@@ -12,6 +14,7 @@ import static robot.Robot.shooter;
 public class Shoot extends Command {
     private double distance;
     private double timeout;
+    private NetworkTableEntry velocityEntry = shooterTable.getEntry("velocity");
     private Timer timer = new Timer();
 
     public Shoot(double distance, double timeout) {
@@ -35,12 +38,15 @@ public class Shoot extends Command {
     @Override
     protected void execute() {
        // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
-        shooter.setSpeed(100);
+        shooter.setSpeed(2100);
         System.out.println(shooter.getSpeed());
+        setNetworkTable();
 //        System.out.println(shooter.getPosition());
     }
 
-
+    private void setNetworkTable() {
+        velocityEntry.setDouble(shooter.getSpeed());
+    }
     private double calculateInitialVelocity(double distance) {
         double numerator = Math.pow(distance, 2) * g;
         double denominator = distance * Math.sin(2 * Math.toRadians(ANGLE)) - 2 * HEIGHT * Math.pow(Math.cos(Math.toRadians(ANGLE)), 2); // https://en.wikipedia.org/wiki/Projectile_motion#Displacement

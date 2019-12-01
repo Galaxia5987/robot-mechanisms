@@ -7,10 +7,11 @@
 
 package robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.shooter.Shooter;
 
@@ -23,6 +24,8 @@ import robot.subsystems.shooter.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
+    public static final NetworkTable shooterTable = NetworkTableInstance.getDefault().getTable("shooter");
+
     // The robot's subsystems
     public static final Drivetrain m_drivetrain = new Drivetrain();
     public static Shooter shooter = new Shooter();
