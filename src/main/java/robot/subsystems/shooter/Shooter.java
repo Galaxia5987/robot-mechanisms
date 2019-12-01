@@ -14,6 +14,7 @@ public class Shooter extends Subsystem {
     private TalonSRX shooterMaster = new TalonSRX(MASTER);
     private VictorSPX shooterSlave = new VictorSPX(SLAVE);
 
+
     public Shooter() {
         shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
         shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER / TICKS_PER_METER); // TODO: Revert
@@ -30,19 +31,20 @@ public class Shooter extends Subsystem {
     }
 
     public double getSpeed() {
-        return shooterMaster.getSelectedSensorVelocity() * 10;
+        return shooterMaster.getSelectedSensorVelocity();
     }
 
     /**
      * @param speed
      */
     public void setSpeed(double speed) {
-        shooterMaster.set(ControlMode.Velocity, speed * 10); // TODO: Convert between m/s to native sensor units/100ms
+        shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
     }
 
     public double getPosition() {
         return shooterMaster.getSelectedSensorPosition();
     }
+
 
     @Override
     protected void initDefaultCommand() {
