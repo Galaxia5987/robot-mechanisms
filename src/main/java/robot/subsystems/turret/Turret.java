@@ -76,12 +76,12 @@ public class Turret extends Subsystem {
 
     /**
      * change the angle to the desired angle,
-     * if you use the same Direction, use {@link #setTargetAngle(double)}.
+     * if you would like to use the same Direction, use {@link #setTargetAngle(double)}.
      * the value can be between 0 to 150 degrees.
      *
-     * @param targetAngle  the desired angle
-     * @param newDirection the direction you want to be.
-     * @throws IllegalArgumentException(String) if the angle is more than 150
+     * @param targetAngle the desired angle.
+     * @param newDirection the direction you want the Turret to turn.
+     * @throws IllegalArgumentException(String) if the angle is more than 150 degrees.
      */
     public void setTargetAngle(double targetAngle, Direction newDirection) {
         if (targetAngle > LIMIT_PER_SIDE)
