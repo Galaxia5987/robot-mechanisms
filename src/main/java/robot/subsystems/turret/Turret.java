@@ -1,6 +1,7 @@
 package robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.subsystems.turret.commands.TurnTurret;
@@ -8,29 +9,49 @@ import robot.subsystems.turret.commands.TurnTurret;
 import static robot.Ports.Turret.*;
 import static robot.Constants.Turret.*;
 
-//TODO: Add documentation
 /**
  * @author Adam & Barel
  * @version 1.0
  * <p>
- *
+ * this class includes methods for the Turret.
  * {@using TalonSRX}
  * {@using Relative Encoder}
+ * {@using Hall Effect}
  */
 public class Turret extends Subsystem {
     private TalonSRX master = new TalonSRX(MASTER);
     private double angle;
     private Direction direction;
 
+    /**
+     * configures the encoder and PID constants.
+     */
     public Turret() {
-        reset();
         direction = Direction.RIGHT;
-        //TODO: configure controller
+        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
+        master.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
+        master.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
+        master.config_kD(TALON_PID_SLOT, KD, TIMEOUT_MS);
+        master.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
+        master.setInverted(IS_MASTER_INVERTED);
+        master.configPeakCurrentLimit(MAX_CURRENT);
+        reset();
+        master.setSelectedSensorPosition(0);
     }
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new TurnTurret());
+        setDefaultCommand(new TurnTurret(45));
+    }
+
+    /**
+     * set the direction of the Turret,
+     * either left or right.
+     *
+     * @param direction the direction that the Turret will move.
+     */
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     /**
@@ -88,6 +109,13 @@ public class Turret extends Subsystem {
     }
 
     /**
+     * reset the turret so it will be at the same position every run.
+     */
+    public void reset() {
+        //TODO: Use hall-effect to reset the angle
+    }
+
+    /**
      * convert the angle to ticks so the controller will apply the right amount of power on the turret.
      *
      * @param degrees the degrees to convert.
@@ -108,12 +136,8 @@ public class Turret extends Subsystem {
     }
 
     /**
-     * reset the turret so it will be at the same position every run.
+     * the direction of the Turret, left and right
      */
-    public void reset() {
-        //TODO: Use hall-effect to reset the angle
-    }
-
     public enum Direction {
         LEFT,
         RIGHT
