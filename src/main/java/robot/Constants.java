@@ -39,7 +39,16 @@ public class Constants {
     }
 
     public static class Turret {
-        public static final double TICKS_PER_ANGLE = 1; // TODO: change to real value
-        public static final double LIMIT_PER_SIDE = 150;
+        public static final int TIMEOUT_MS = 20;
+        public static final int TALON_PID_SLOT = 0;
+        public static final int MAX_CURRENT = 35;
+        public static final double TICKS_PER_ANGLE = 0; // TODO: change to real value
+        public static final double LIMIT_PER_SIDE = 150; // in degrees
+        public static final double KP = 0;
+        public static final double KI = 0;
+        public static final double KD = 0;
+        public static final double KF = 0;
+        public static final boolean IS_MASTER_INVERTED = false;
+
     }
 }
