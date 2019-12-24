@@ -39,6 +39,7 @@ public class Constants {
     }
 
     public static class Turret {
-
+        public static final double TICKS_PER_ANGLE = 1; // TODO: change to real value
+        public static final double LIMIT_PER_SIDE = 150;
     }
 }
