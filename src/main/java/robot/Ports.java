@@ -10,4 +10,8 @@ public class Ports {
         public static final int MASTER = 7;
         public static final int SLAVE = 8;
     }
+
+    public static class Turret {
+
+    }
 }

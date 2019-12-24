@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.shooter.Shooter;
+import robot.subsystems.turret.Turret;
 
 
 /**
@@ -28,7 +29,8 @@ public class Robot extends TimedRobot {
 
     // The robot's subsystems
     public static final Drivetrain m_drivetrain = new Drivetrain();
-    public static Shooter shooter = new Shooter();
+    public static final Shooter shooter = new Shooter();
+    public static final Turret turret = new Turret();
     //public static final Elevator m_elevator = new Elevator();
     public static RobotContainer m_robotContainer;
 
