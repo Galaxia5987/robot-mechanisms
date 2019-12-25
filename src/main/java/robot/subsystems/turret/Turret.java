@@ -111,10 +111,16 @@ public class Turret extends Subsystem {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
+    /**
+     * @return return if the state of the the Hall Effect sensor is Closed
+     */
     private boolean getHallEffect(){
         return master.getSensorCollection().isRevLimitSwitchClosed();
     }
 
+    /**
+     * set encoder position to the Hall Effect position
+     */
     public void adjustEncoderPosition(){
         if (getHallEffect()){
             master.setSelectedSensorPosition((int)convertDegreesToTicks(HALL_EFFECT_POSITION),0,TIMEOUT_MS);
