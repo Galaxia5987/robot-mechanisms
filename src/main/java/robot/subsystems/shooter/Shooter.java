@@ -7,12 +7,12 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import static robot.Constants.Shooter.*;
-import static robot.Ports.Shooter.MASTER;
-import static robot.Ports.Shooter.SLAVE;
+import static robot.Ports.Shooter.*;
 
 public class Shooter extends Subsystem {
     private TalonSRX shooterMaster = new TalonSRX(MASTER);
     private VictorSPX shooterSlave = new VictorSPX(SLAVE);
+    private VictorSPX inputMotor = new VictorSPX(INPUT_MOTOR);
 
 
     public Shooter() {
@@ -39,6 +39,10 @@ public class Shooter extends Subsystem {
      */
     public void setSpeed(double speed) {
         shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
+    }
+
+    public void setInputSpeed(double inputSpeed){
+        inputMotor.set(ControlMode.Velocity, inputSpeed);
     }
 
     public double getPosition() {
