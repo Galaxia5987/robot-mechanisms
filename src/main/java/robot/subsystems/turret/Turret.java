@@ -48,10 +48,10 @@ public class Turret extends Subsystem {
     }
 
     /**
-     * set the direction of the Turret,
+     * set the direction of the turret,
      * either left or right.
      *
-     * @param direction the direction that the Turret will move.
+     * @param direction the direction that the turret will move.
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
@@ -83,7 +83,7 @@ public class Turret extends Subsystem {
      * the value can be between 0 to 150 degrees.
      *
      * @param targetAngle the desired angle.
-     * @param newDirection the direction you want the Turret to turn.
+     * @param newDirection the direction you want the turret to turn.
      * @throws IllegalArgumentException(String) if the angle is more than 150 degrees.
      */
     public void setTargetAngle(double targetAngle, Direction newDirection) {
