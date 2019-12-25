@@ -2,6 +2,8 @@ package robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.subsystems.turret.commands.TurnTurret;
@@ -35,6 +37,7 @@ public class Turret extends Subsystem {
         master.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
         master.setInverted(IS_MASTER_INVERTED);
         master.configPeakCurrentLimit(MAX_CURRENT);
+        master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         reset();
         master.setSelectedSensorPosition(0);
     }
@@ -108,10 +111,20 @@ public class Turret extends Subsystem {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
+    private boolean getHallEffect(){
+        return master.getSensorCollection().isRevLimitSwitchClosed();
+    }
+
+    public void adjustEncoderPosition(){
+        if (getHallEffect()){
+            master.setSelectedSensorPosition((int)convertDegreesToTicks(HALL_EFFECT_POSITION),0,TIMEOUT_MS);
+        }
+    }
+
     /**
      * reset the turret so it will be at the same position every run.
      */
-    public void reset() {
+     public void reset() {
         //TODO: Use hall-effect to reset the angle
     }
 
