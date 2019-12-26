@@ -42,7 +42,7 @@ public class Shooter extends Subsystem {
     }
 
     public void setInputSpeed(double inputSpeed){
-        inputMotor.set(ControlMode.Velocity, inputSpeed);
+        inputMotor.set(ControlMode.PercentOutput, inputSpeed);
     }
 
     public double getPosition() {
