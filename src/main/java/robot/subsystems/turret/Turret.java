@@ -8,8 +8,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import robot.subsystems.turret.commands.TurnTurret;
 
-import static robot.Ports.Turret.*;
 import static robot.Constants.Turret.*;
+import static robot.Ports.Turret.MASTER;
 
 /**
  * @author Adam & Barel
@@ -74,24 +74,25 @@ public class Turret extends Subsystem {
      * @param targetAngle the desired angle
      */
     public void setTargetAngle(double targetAngle) {
-        setTargetAngle(targetAngle, direction);
+       setTargetAngle(targetAngle, direction);
+
     }
 
     /**
      * change the angle to the desired angle,
-     * if you would like to use the same Direction, use {@link #setTargetAngle(double)}.
+     * if you would like to use the same Direction, use {@link #setTargetAngle(double)} instead.
      * the value can be between 0 to 150 degrees.
      *
-     * @param targetAngle the desired angle.
+     * @param targetAngle  the desired angle.
      * @param newDirection the direction you want the turret to turn.
-     * @throws IllegalArgumentException(String) if the angle is more than 150 degrees.
+     * @exception IllegalArgumentException(String) if the angle is more than 150 degrees.
      */
     public void setTargetAngle(double targetAngle, Direction newDirection) {
         if (targetAngle > LIMIT_PER_SIDE)
             throw new IllegalArgumentException("angle cannot be more than 150");
         if (newDirection != direction) {
             //TODO: check which side is the positive one
-//            changeAngle(-(targetAngle + angle));
+            changeAngle(newDirection == Direction.LEFT ? (targetAngle + angle) : -(targetAngle + angle));
             this.direction = newDirection;
             this.angle = targetAngle;
             return;
@@ -114,26 +115,26 @@ public class Turret extends Subsystem {
     /**
      * @return return if the state of the the Hall Effect sensor is Closed.
      */
-    private boolean getHallEffect(){
+    private boolean getHallEffect() {
         return master.getSensorCollection().isRevLimitSwitchClosed();
     }
 
     /**
      * set encoder position to the Hall Effect position.
      */
-    public void adjustEncoderPosition(){
-        if (getHallEffect()){
-            master.setSelectedSensorPosition((int)convertDegreesToTicks(HALL_EFFECT_POSITION),0,TIMEOUT_MS);
+    public void adjustEncoderPosition() {
+        if (getHallEffect()) {
+            master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TIMEOUT_MS);
         }
     }
 
     /**
      * reset the turret so it will be at the same position every run.
      */
-     public void reset() {
-         if (!getHallEffect()){
-             changeAngle(HALL_EFFECT_POSITION);
-         }
+    public void reset() {
+        if (!getHallEffect()) {
+            changeAngle(HALL_EFFECT_POSITION);
+        }
     }
 
     /**
