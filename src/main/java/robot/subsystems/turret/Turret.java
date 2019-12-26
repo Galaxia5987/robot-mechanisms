@@ -67,40 +67,22 @@ public class Turret extends Subsystem {
     }
 
     /**
-     * change the angle to the desired angle in the <b>same</b> direction.
-     * the value can be between 0 to 150 degrees.
-     * {@link #setTargetAngle(double, Direction)}
+     * change the angle to the desired angle,
+     * if you would like to use the same Direction.
+     * the value can be between -180 to 180 degrees.
      *
-     * @param targetAngle the desired angle
+     * @param targetAngle the desired angle.
      */
     public void setTargetAngle(double targetAngle) {
-       setTargetAngle(targetAngle, direction);
-
-    }
-
-    /**
-     * change the angle to the desired angle,
-     * if you would like to use the same Direction, use {@link #setTargetAngle(double)} instead.
-     * the value can be between 0 to 150 degrees.
-     *
-     * @param targetAngle  the desired angle.
-     * @param newDirection the direction you want the turret to turn.
-     * @exception IllegalArgumentException(String) if the angle is more than 150 degrees.
-     */
-    public void setTargetAngle(double targetAngle, Direction newDirection) {
-        if (targetAngle > LIMIT_PER_SIDE)
-            throw new IllegalArgumentException("angle cannot be more than 150");
-        if (newDirection != direction) {
-            //TODO: check which side is the positive one
-            changeAngle(newDirection == Direction.LEFT ? (targetAngle + angle) : -(targetAngle + angle));
-            this.direction = newDirection;
-            this.angle = targetAngle;
-            return;
-        }
         if (Double.compare(targetAngle, angle) == 0) return;
+        while (targetAngle > 180)
+            targetAngle -= 360;
+        while (targetAngle < -180) {
+            targetAngle += 360;
+        }
         //TODO: check which side is the positive one
-        changeAngle((angle > targetAngle) ? -targetAngle : targetAngle);
         this.angle = targetAngle;
+        changeAngle(angle);
     }
 
     /**
