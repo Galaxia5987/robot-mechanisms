@@ -36,7 +36,7 @@ public class Constants {
         public static final double g = 9.80665; // [m/sec^2]
         public static final double TARGET_DISTANCE = 2; // [m]
         public static final double SHOOTING_TIME = 3.5;
-        public static final double THRESHOLD = 0.1;
+        public static final double TARGET_VELOCITY = 1200;
     }
 
     public static class ExampleSubsystem1 {

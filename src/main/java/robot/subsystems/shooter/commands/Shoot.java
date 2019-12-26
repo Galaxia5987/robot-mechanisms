@@ -38,10 +38,10 @@ public class Shoot extends Command {
     @Override
     protected void execute() {
         // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
-        shooter.setSpeed(calculateVelocity(distance));
+        shooter.setSpeed(TARGET_VELOCITY);
         System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
         setNetworkTable();
-        if (Math.abs(shooter.getSpeed()-calculateVelocity(distance))>=THRESHOLD){
+        if (Math.abs(shooter.getSpeed()-TARGET_VELOCITY)<=TARGET_VELOCITY*0.05){
             shooter.setInputSpeed(0.5);
         }
 //        System.out.println(shooter.getPosition());
