@@ -1,10 +1,11 @@
 package robot.subsystems.turret.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import robot.Robot;
+
 import robot.subsystems.turret.Turret.Direction;
 
 import static robot.Robot.turret;
+import static robot.Constants.Turret.*;
 
 /**
  *
@@ -38,7 +39,7 @@ public class TurnTurret extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return turret.getAngle() == angle;
+        return Math.abs(turret.getAngle() - angle) <= ANGLE_THRESHOLD;
     }
 
     // Called once after isFinished returns true

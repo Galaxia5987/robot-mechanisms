@@ -50,5 +50,6 @@ public class Constants {
         public static final double KF = 0;
         public static final boolean IS_MASTER_INVERTED = false;
         public static final double HALL_EFFECT_POSITION = 0; // in degrees
+        public static final double ANGLE_THRESHOLD = 5;
     }
 }
