@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static robot.Robot.shooter;
 import static robot.Robot.shooterTable;
+import static robot.Constants.Shooter.*;
 
 /**
  *
@@ -29,7 +30,6 @@ public class Shoot extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        shooter.setInputSpeed(0.5);
         timer.reset();
         timer.start();
     }
@@ -41,6 +41,9 @@ public class Shoot extends Command {
         shooter.setSpeed(calculateVelocity(distance));
         System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
         setNetworkTable();
+        if (Math.abs(shooter.getSpeed()-calculateVelocity(distance))>=THRESHOLD){
+            shooter.setInputSpeed(0.5);
+        }
 //        System.out.println(shooter.getPosition());
     }
 
