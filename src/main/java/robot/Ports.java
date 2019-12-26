@@ -12,6 +12,6 @@ public class Ports {
     }
 
     public static class Turret {
-        public static final int MASTER = 0;
+        public static final int MASTER = 11;
     }
 }
