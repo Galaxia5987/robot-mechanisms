@@ -131,7 +131,9 @@ public class Turret extends Subsystem {
      * reset the turret so it will be at the same position every run.
      */
      public void reset() {
-         changeAngle(HALL_EFFECT_POSITION);
+         if (!getHallEffect()){
+             changeAngle(HALL_EFFECT_POSITION);
+         }
     }
 
     /**
