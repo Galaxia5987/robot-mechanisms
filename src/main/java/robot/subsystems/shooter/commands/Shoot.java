@@ -29,7 +29,7 @@ public class Shoot extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        shooter.setInputSpeed(1);
+        shooter.setInputSpeed(0.5);
         timer.reset();
         timer.start();
     }
