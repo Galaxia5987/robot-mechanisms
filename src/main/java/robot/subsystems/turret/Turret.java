@@ -76,9 +76,7 @@ public class Turret extends Subsystem {
     public void setTargetAngle(double targetAngle) {
         if (Double.compare(targetAngle, angle) == 0) return;
         targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
-        if (targetAngle >= -180 && targetAngle <= -170)
-            targetAngle += 10;
-
+        targetAngle = constrain(MAXIMUM_ANGLE, targetAngle, MINIMUM_ANGLE);
         //TODO: check which side is the positive one
         this.angle = targetAngle;
         changeAngle(angle);
@@ -116,6 +114,10 @@ public class Turret extends Subsystem {
         if (!getHallEffect()) {
             changeAngle(HALL_EFFECT_POSITION);
         }
+    }
+
+    private double constrain(double maximum, double angle, double minimum) {
+        return Math.min(maximum, Math.max(minimum, angle));
     }
 
     /**
