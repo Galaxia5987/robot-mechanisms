@@ -108,7 +108,7 @@ public class Turret extends Subsystem {
      * @return the degrees converted to ticks.
      */
     private double convertDegreesToTicks(double degrees) {
-        return degrees / TICKS_PER_ANGLE;
+        return degrees / TICKS_PER_DEGREE;
     }
 
     /**
@@ -118,6 +118,6 @@ public class Turret extends Subsystem {
      * @return the ticks converted to ticks
      */
     private double convertTicksToDegrees(double ticks) {
-        return ticks * TICKS_PER_ANGLE;
+        return ticks * TICKS_PER_DEGREE;
     }
 }
