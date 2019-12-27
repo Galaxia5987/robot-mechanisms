@@ -2,28 +2,21 @@ package robot.subsystems.turret.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import robot.subsystems.turret.Turret.Direction;
-
+import static robot.Constants.Turret.ANGLE_THRESHOLD;
 import static robot.Robot.turret;
-import static robot.Constants.Turret.*;
 
 /**
  *
  */
 public class TurnTurret extends Command {
 
-    private Direction direction;
     private double angle;
 
     public TurnTurret(double angle) {
-        this(angle, Direction.LEFT);
-    }
-
-    public TurnTurret(double angle, Direction direction) {
         requires(turret);
         this.angle = angle;
-        this.direction = direction;
     }
+
 
     // Called just before this Command runs the first time
     @Override

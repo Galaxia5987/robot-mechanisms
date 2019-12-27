@@ -23,13 +23,11 @@ import static robot.Ports.Turret.MASTER;
 public class Turret extends Subsystem {
     private TalonSRX master = new TalonSRX(MASTER);
     private double angle;
-    private Direction direction;
 
     /**
      * configures the encoder and PID constants.
      */
     public Turret() {
-        direction = Direction.RIGHT;
         master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
         master.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
         master.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
@@ -45,16 +43,6 @@ public class Turret extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new TurnTurret(45));
-    }
-
-    /**
-     * set the direction of the turret,
-     * either left or right.
-     *
-     * @param direction the direction that the turret will move.
-     */
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
     /**
@@ -138,13 +126,5 @@ public class Turret extends Subsystem {
      */
     private double convertTicksToDegrees(double ticks) {
         return ticks * TICKS_PER_ANGLE;
-    }
-
-    /**
-     * the direction the turret turns, left and right.
-     */
-    public enum Direction {
-        LEFT,
-        RIGHT
     }
 }
