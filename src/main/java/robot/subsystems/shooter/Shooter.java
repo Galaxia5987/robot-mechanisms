@@ -17,21 +17,25 @@ public class Shooter extends Subsystem {
 
     public Shooter() {
         shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
-        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER / TICKS_PER_METER); // TODO: Revert
+//        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER / TICKS_PER_METER); // TODO: Revert
         shooterSlave.follow(shooterMaster);
         shooterMaster.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
         shooterMaster.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
         shooterMaster.config_kD(TALON_PID_SLOT, KD, TIMEOUT_MS);
         shooterMaster.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
         shooterMaster.setInverted(IS_MASTER_INVERTED);
+        shooterMaster.configVoltageCompSaturation(12);
+        shooterMaster.enableVoltageCompensation(true);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
-        shooterMaster.configPeakCurrentLimit(MAX_CURRENT);
+        shooterSlave.configVoltageCompSaturation(12);
+        shooterSlave.enableVoltageCompensation(true);
+//        shooterMaster.configPeakCurrentLimit(MAX_CURRENT);
         shooterMaster.setSelectedSensorPosition(0);
         // TODO: Configure peak and nominal outputs, if needed
     }
 
     public double getSpeed() {
-        return shooterMaster.getSelectedSensorVelocity();
+        return shooterMaster.getSelectedSensorVelocity() * 10;
     }
 
     /**
