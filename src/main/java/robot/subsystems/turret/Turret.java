@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import robot.subsystems.turret.commands.TurnTurret;
 
 import static robot.Constants.Turret.*;
 import static robot.Ports.Turret.MASTER;
@@ -35,8 +34,7 @@ public class Turret extends Subsystem {
         master.setInverted(IS_MASTER_INVERTED);
         master.configPeakCurrentLimit(MAX_CURRENT);
         master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        reset();
-        master.setSelectedSensorPosition(0);
+        master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TIMEOUT_MS);
     }
 
     @Override
