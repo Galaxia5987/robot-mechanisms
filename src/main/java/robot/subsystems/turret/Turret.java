@@ -26,6 +26,7 @@ public class Turret extends Subsystem {
      * configures the encoder and PID constants.
      */
     public Turret() {
+        master.configFactoryDefault();
         master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
         master.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
         master.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
@@ -33,8 +34,8 @@ public class Turret extends Subsystem {
         master.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
         master.setInverted(IS_MASTER_INVERTED);
         master.configPeakCurrentLimit(MAX_CURRENT);
-        master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TIMEOUT_MS);
+        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        master.setSelectedSensorPosition((int) 0, 0, TIMEOUT_MS);
     }
 
     @Override
@@ -76,14 +77,14 @@ public class Turret extends Subsystem {
      * @return return if the state of the the Hall Effect sensor is Closed.
      */
     private boolean getHallEffect() {
-        return master.getSensorCollection().isRevLimitSwitchClosed();
+        return !master.getSensorCollection().isRevLimitSwitchClosed();
     }
 
     /**
      * set encoder position to the Hall Effect position.
      */
     public void adjustEncoderPosition() {
-        if (getHallEffect()) {
+        if (false) {
             master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TIMEOUT_MS);
         }
     }
@@ -99,7 +100,7 @@ public class Turret extends Subsystem {
      * @return the degrees converted to ticks.
      */
     private double convertDegreesToTicks(double degrees) {
-        return degrees / TICKS_PER_DEGREE;
+        return degrees * TICKS_PER_DEGREE;
     }
 
     /**
@@ -109,6 +110,10 @@ public class Turret extends Subsystem {
      * @return the ticks converted to ticks
      */
     private double convertTicksToDegrees(double ticks) {
-        return ticks * TICKS_PER_DEGREE;
+        return ticks / TICKS_PER_DEGREE;
+    }
+
+    public void reset() {
+        master.setSelectedSensorPosition(0);
     }
 }
