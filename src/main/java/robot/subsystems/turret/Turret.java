@@ -22,7 +22,6 @@ import static robot.Ports.Turret.MASTER;
  */
 public class Turret extends Subsystem {
     private TalonSRX master = new TalonSRX(MASTER);
-    private double angle;
 
     /**
      * configures the encoder and PID constants.
@@ -61,12 +60,9 @@ public class Turret extends Subsystem {
      * @param targetAngle the desired angle.
      */
     public void setTargetAngle(double targetAngle) {
-        if (Double.compare(targetAngle, angle) == 0) return;
         targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
         targetAngle = constrain(MAXIMUM_ANGLE, targetAngle, MINIMUM_ANGLE);
-        //TODO: check which side is the positive one
-        this.angle = targetAngle;
-        changeAngle(angle);
+        moveTurret(targetAngle);
     }
 
     /**
@@ -74,7 +70,7 @@ public class Turret extends Subsystem {
      *
      * @param angle the desired angle
      */
-    private void changeAngle(double angle) {
+    private void moveTurret(double angle) {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
@@ -99,11 +95,11 @@ public class Turret extends Subsystem {
      */
     public void reset() {
         if (!getHallEffect()) {
-            changeAngle(HALL_EFFECT_POSITION);
+            moveTurret(HALL_EFFECT_POSITION);
         }
     }
 
-    private double constrain(double maximum, double angle, double minimum) {
+    private double constrain(double maximum, double angle, double minimum) { //TODO: flip min and max
         return Math.min(maximum, Math.max(minimum, angle));
     }
 
