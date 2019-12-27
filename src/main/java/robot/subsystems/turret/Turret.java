@@ -88,15 +88,6 @@ public class Turret extends Subsystem {
         }
     }
 
-    /**
-     * reset the turret so it will be at the same position every run.
-     */
-    public void reset() {
-        if (!getHallEffect()) {
-            moveTurret(HALL_EFFECT_POSITION);
-        }
-    }
-
     private double constrain(double maximum, double angle, double minimum) { //TODO: flip min and max
         return Math.min(maximum, Math.max(minimum, angle));
     }
