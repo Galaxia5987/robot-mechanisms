@@ -41,7 +41,7 @@ public class Shoot extends Command {
         shooter.setSpeed(TARGET_VELOCITY);
         System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
         setNetworkTable();
-        if (Math.abs(shooter.getSpeed()-TARGET_VELOCITY)<=TARGET_VELOCITY*0.05){
+        if (Math.abs(shooter.getSpeed()-TARGET_VELOCITY)<= TARGET_VELOCITY*0.05){
             shooter.setInputSpeed(0.5);
         }
 //        System.out.println(shooter.getPosition());
