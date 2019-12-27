@@ -1,5 +1,7 @@
 package robot;
 
+import javax.xml.xpath.XPathConstants;
+
 /**
  * A class holding all of the constants of every mechanism on the robot.
  * Place global constants in this class, and mechanism-specific constants inside their respective mechanism subclass.
@@ -49,7 +51,9 @@ public class Constants {
         public static final double KD = 0;
         public static final double KF = 0;
         public static final boolean IS_MASTER_INVERTED = false;
-        public static final double HALL_EFFECT_POSITION = 0; // in degrees
+        public static final double HALL_EFFECT_POSITION = 180; // in degrees
         public static final double ANGLE_THRESHOLD = 5;
+        public static final double MAXIMUM_ANGLE = 350;
+        public static final double MINIMUM_ANGLE = 0;
     }
 }
