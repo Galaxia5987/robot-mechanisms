@@ -75,11 +75,10 @@ public class Turret extends Subsystem {
      */
     public void setTargetAngle(double targetAngle) {
         if (Double.compare(targetAngle, angle) == 0) return;
-        while (targetAngle > 180)
-            targetAngle -= 360;
-        while (targetAngle < -180) {
-            targetAngle += 360;
-        }
+        targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
+        if (targetAngle >= -180 && targetAngle <= -170)
+            targetAngle += 10;
+
         //TODO: check which side is the positive one
         this.angle = targetAngle;
         changeAngle(angle);
