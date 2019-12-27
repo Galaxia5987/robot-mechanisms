@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-
+        turret.adjustEncoderPosition();
     }
 
 
@@ -106,6 +106,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        turret.reset();
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
@@ -116,6 +117,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        System.out.println("the current angle is " + turret.getAngle());
         Scheduler.getInstance().run();
     }
 
