@@ -41,8 +41,6 @@ public class Constants {
     }
 
     public static class Turret {
-        public static final int TIMEOUT_MS = 20;
-        public static final int TALON_PID_SLOT = 0;
         public static final int MAX_CURRENT = 35;
         public static final double TICKS_PER_DEGREE = 260.7/360; // TODO: change to real value
         public static final double KP = 0;

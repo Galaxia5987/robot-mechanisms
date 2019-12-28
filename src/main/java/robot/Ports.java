@@ -13,5 +13,7 @@ public class Ports {
 
     public static class Turret {
         public static final int MASTER = 11;
+        public static final int TALON_TIMEOUT = 20;
+        public static final int TALON_PID_SLOT = 0;
     }
 }
