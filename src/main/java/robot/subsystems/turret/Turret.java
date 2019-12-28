@@ -84,12 +84,12 @@ public class Turret extends Subsystem {
      * set encoder position to the Hall Effect position.
      */
     public void adjustEncoderPosition() {
-        if (false) {
+        if (getHallEffect()) {
             master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TIMEOUT_MS);
         }
     }
 
-    private double constrain(double maximum, double angle, double minimum) { //TODO: flip min and max
+    private double constrain(double minimum, double angle, double maximum) {
         return Math.min(maximum, Math.max(minimum, angle));
     }
 
