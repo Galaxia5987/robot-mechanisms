@@ -57,7 +57,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
-        turret.adjustEncoderPosition();
+        if (turret.getHallEffect())
+            turret.adjustEncoderPosition();
     }
 
 
