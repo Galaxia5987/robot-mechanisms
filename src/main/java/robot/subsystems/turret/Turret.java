@@ -76,7 +76,7 @@ public class Turret extends Subsystem {
     /**
      * @return return if the state of the the Hall Effect sensor is Closed.
      */
-    private boolean getHallEffect() {
+    public boolean getHallEffect() {
         return !master.getSensorCollection().isRevLimitSwitchClosed();
     }
 
@@ -84,7 +84,7 @@ public class Turret extends Subsystem {
      * set encoder position to the Hall Effect position.
      */
     public void adjustEncoderPosition() {
-            master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TALON_TIMEOUT);
+        master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TALON_TIMEOUT);
     }
 
     private double constrain(double minimum, double angle, double maximum) {
