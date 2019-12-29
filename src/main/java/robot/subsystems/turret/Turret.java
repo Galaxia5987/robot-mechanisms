@@ -34,12 +34,19 @@ public class Turret extends Subsystem {
         master.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
         master.setInverted(IS_MASTER_INVERTED);
         master.configPeakCurrentLimit(MAX_CURRENT);
-        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        master.setSelectedSensorPosition((int) 0, 0, TALON_TIMEOUT);
+        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
+        master.setSelectedSensorPosition((int) HALL_EFFECT_POSITION, 0, TALON_TIMEOUT);
     }
 
     @Override
     public void initDefaultCommand() {
+    }
+
+    @Override
+    public void periodic() {
+        System.out.println("the current angle is " + getAngle());
+        if (getHallEffect())
+            adjustEncoderPosition();
     }
 
     /**
