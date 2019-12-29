@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.drivetrain.commands.DriveStraight;
 import robot.subsystems.shooter.commands.Shoot;
+import robot.subsystems.turret.commands.TurnTurret;
 
 import static robot.Constants.Shooter.*;
 
@@ -55,6 +56,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return new Shoot(TARGET_DISTANCE);
+        return new TurnTurret(54);
     }
 }
