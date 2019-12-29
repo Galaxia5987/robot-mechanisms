@@ -10,7 +10,7 @@ import static robot.Robot.turret;
  */
 public class TurnTurret extends Command {
 
-    private double angle;
+    private double angle, startAngle;
 
     public TurnTurret(double angle) {
         requires(turret);
@@ -21,6 +21,7 @@ public class TurnTurret extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        startAngle = turret.getAngle();
         turret.setTargetAngle(angle);
     }
 
@@ -39,5 +40,6 @@ public class TurnTurret extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        //turret.stop();
     }
 }
