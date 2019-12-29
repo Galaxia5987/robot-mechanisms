@@ -25,7 +25,7 @@ public class Constants {
         public static final double KD = 0.05;
         public static final double KF = 0;
         public static final int TALON_TIMEOUT = 20;
-        public static final boolean IS_MASTER_INVERTED = false;
+        public static final boolean IS_MASTER_INVERTED = true;
         public static final boolean IS_SLAVE_INVERTED = true;
         public static final int MAX_CURRENT = 35; //[A]
         public static final double TICKS_PER_METER = 36 / (2 * 0.05 * Math.PI);
@@ -36,7 +36,7 @@ public class Constants {
         public static final double g = 9.80665; // [m/sec^2]
         public static final double TARGET_DISTANCE = 2; // [m]
         public static final double SHOOTING_TIME = 3.5;
-        public static final double TARGET_VELOCITY = 1650;
+        public static final double TARGET_VELOCITY = 650;
     }
 
     public static class ExampleSubsystem1 {
