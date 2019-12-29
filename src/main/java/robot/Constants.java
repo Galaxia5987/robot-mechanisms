@@ -45,11 +45,11 @@ public class Constants {
         public static final int TALON_PID_SLOT = 0;
         public static final int MAX_CURRENT = 35;
         public static final double TICKS_PER_DEGREE = 260.7/360; // TODO: change to real value
-        public static final double KP = 0;
-        public static final double KI = 0;
-        public static final double KD = 0;
-        public static final double KF = 0;
-        public static final boolean IS_MASTER_INVERTED = false;
+        public static double KP = 0.1;
+        public static double KI = 0;
+        public static double KD = 0;
+        public static double KF = 0;
+        public static final boolean IS_MASTER_INVERTED = true;
         public static final double HALL_EFFECT_POSITION = 180; // in degrees
         public static final double ANGLE_THRESHOLD = 5;
         public static final double MAXIMUM_ANGLE = 350;
