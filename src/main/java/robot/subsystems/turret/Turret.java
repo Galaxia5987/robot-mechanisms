@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static robot.Constants.Turret.*;
-import static robot.Ports.Turret.MASTER;
+import static robot.Ports.Turret.*;
 
 /**
  * @author Adam & Barel
@@ -53,14 +53,16 @@ public class Turret extends Subsystem {
     }
 
     public void updateConstants() {
-        KP = getConstant("kp", KP);
-        KI = getConstant("kI", KI);
-        KD = getConstant("kD", KD);
-        KF = getConstant("kF", KF);
-        master.config_kP(TALON_PID_SLOT, KP, TALON_TIMEOUT);
-        master.config_kI(TALON_PID_SLOT, KI, TALON_TIMEOUT);
-        master.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT);
-        master.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
+        if (KP != getConstant("kp", KP) || KI != getConstant("kI", KI) || getConstant("kD", KD) != KD || getConstant("kF", KF) != KF) {
+            KP = getConstant("kp", KP);
+            KI = getConstant("kI", KI);
+            KD = getConstant("kD", KD);
+            KF = getConstant("kF", KF);
+            master.config_kP(TALON_PID_SLOT, KP, TALON_TIMEOUT);
+            master.config_kI(TALON_PID_SLOT, KI, TALON_TIMEOUT);
+            master.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT);
+            master.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
+        }
     }
 
     @Override
@@ -68,7 +70,8 @@ public class Turret extends Subsystem {
         System.out.println("the current angle is " + getAngle());
         if (getHallEffect())
             adjustEncoderPosition();
-        updateConstants();
+//        updateConstants();
+        SmartDashboard.putNumber("ANGLE", getAngle());
     }
 
     /**
@@ -103,9 +106,10 @@ public class Turret extends Subsystem {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
-    public void stop(){
+    public void stop() {
         master.set(ControlMode.PercentOutput, 0);
     }
+
     /**
      * @return return if the state of the Hall Effect sensor is Closed.
      */
@@ -117,7 +121,7 @@ public class Turret extends Subsystem {
      * set encoder position to the Hall Effect position.
      */
     public void adjustEncoderPosition() {
-        master.setSelectedSensorPosition((int) convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TALON_TIMEOUT);
+        master.setSelectedSensorPosition(convertDegreesToTicks(HALL_EFFECT_POSITION), 0, TALON_TIMEOUT);
     }
 
     private double constrain(double minimum, double angle, double maximum) {
