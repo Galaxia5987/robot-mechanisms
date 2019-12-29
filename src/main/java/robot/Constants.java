@@ -44,7 +44,7 @@ public class Constants {
         public static final int TALON_TIMEOUT = 20;
         public static final int TALON_PID_SLOT = 0;
         public static final int MAX_CURRENT = 35;
-        public static final double TICKS_PER_DEGREE = 260.7/360; // TODO: change to real value
+        public static final double TICKS_PER_DEGREE = 260.7/180;
         public static double KP = 0.1;
         public static double KI = 0;
         public static double KD = 0;
