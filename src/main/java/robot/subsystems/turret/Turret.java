@@ -6,9 +6,10 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static robot.Constants.Turret.*;
-import static robot.Ports.Turret.*;
+import static robot.Ports.Turret.MASTER;
 
 /**
  * @author Adam & Barel
@@ -40,6 +41,23 @@ public class Turret extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
+
+    }
+
+    private double getConstant(String key, double value) {
+        SmartDashboard.putNumber(key, SmartDashboard.getNumber(key, value));
+        return SmartDashboard.getNumber(key, value);
+    }
+
+    public void updateConstants() {
+        KP = getConstant("kp", KP);
+        KI = getConstant("kI", KI);
+        KD = getConstant("kD", KD);
+        KF = getConstant("kF", KF);
+        master.config_kP(TALON_PID_SLOT, KP, TALON_TIMEOUT);
+        master.config_kI(TALON_PID_SLOT, KI, TALON_TIMEOUT);
+        master.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT);
+        master.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
     }
 
     @Override
@@ -47,6 +65,7 @@ public class Turret extends Subsystem {
         System.out.println("the current angle is " + getAngle());
         if (getHallEffect())
             adjustEncoderPosition();
+        updateConstants();
     }
 
     /**
@@ -61,15 +80,17 @@ public class Turret extends Subsystem {
     /**
      * change the angle to the desired angle,
      * if you would like to use the same Direction.
-     * the value can be between -180 to 180 degrees.
+     * the value can be between 0 to 360 degrees.
      *
      * @param targetAngle the desired angle.
      */
     public void setTargetAngle(double targetAngle) {
         targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
-        targetAngle = constrain(MAXIMUM_ANGLE, targetAngle, MINIMUM_ANGLE);
+        targetAngle = constrain(MINIMUM_ANGLE, targetAngle, MAXIMUM_ANGLE);
+        System.out.println(targetAngle);
         moveTurret(targetAngle);
     }
+
 
     /**
      * applying power to the controller for moving the turret.
@@ -77,11 +98,12 @@ public class Turret extends Subsystem {
      * @param angle the desired angle
      */
     private void moveTurret(double angle) {
+        System.out.println(convertDegreesToTicks(angle));
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
     /**
-     * @return return if the state of the the Hall Effect sensor is Closed.
+     * @return return if the state of the Hall Effect sensor is Closed.
      */
     public boolean getHallEffect() {
         return !master.getSensorCollection().isRevLimitSwitchClosed();
