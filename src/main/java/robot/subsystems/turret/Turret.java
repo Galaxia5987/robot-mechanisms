@@ -90,7 +90,6 @@ public class Turret extends Subsystem {
     public void setTargetAngle(double targetAngle) {
         targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
         targetAngle = constrain(MINIMUM_ANGLE, targetAngle, MAXIMUM_ANGLE);
-        System.out.println(targetAngle);
         moveTurret(targetAngle);
     }
 
@@ -101,7 +100,6 @@ public class Turret extends Subsystem {
      * @param angle the desired angle
      */
     private void moveTurret(double angle) {
-        System.out.println(convertDegreesToTicks(angle));
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
