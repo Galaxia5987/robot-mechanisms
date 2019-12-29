@@ -103,6 +103,9 @@ public class Turret extends Subsystem {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
     }
 
+    public void stop(){
+        master.set(ControlMode.PercentOutput, 0);
+    }
     /**
      * @return return if the state of the Hall Effect sensor is Closed.
      */
