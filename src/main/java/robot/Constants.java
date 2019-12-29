@@ -49,7 +49,7 @@ public class Constants {
         public static double KI = 0;
         public static double KD = 0;
         public static double KF = 0;
-        public static final boolean IS_MASTER_INVERTED = true;
+
         public static final double HALL_EFFECT_POSITION = 180; // in degrees
         public static final double ANGLE_THRESHOLD = 5;
         public static final double MAXIMUM_ANGLE = 350;
