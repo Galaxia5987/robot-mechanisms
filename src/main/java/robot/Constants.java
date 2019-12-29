@@ -24,7 +24,7 @@ public class Constants {
         public static final double KI = 0;
         public static final double KD = 0.05;
         public static final double KF = 0;
-        public static final int TIMEOUT_MS = 20;
+        public static final int TALON_TIMEOUT = 20;
         public static final boolean IS_MASTER_INVERTED = false;
         public static final boolean IS_SLAVE_INVERTED = true;
         public static final int MAX_CURRENT = 35; //[A]

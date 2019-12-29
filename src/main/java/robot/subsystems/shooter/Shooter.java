@@ -16,13 +16,13 @@ public class Shooter extends Subsystem {
 
 
     public Shooter() {
-        shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TIMEOUT_MS);
+        shooterMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, TALON_TIMEOUT);
 //        shooterMaster.configSelectedFeedbackCoefficient(TICKS_PER_METER / TICKS_PER_METER); // TODO: Revert
         shooterSlave.follow(shooterMaster);
-        shooterMaster.config_kP(TALON_PID_SLOT, KP, TIMEOUT_MS);
-        shooterMaster.config_kI(TALON_PID_SLOT, KI, TIMEOUT_MS);
-        shooterMaster.config_kD(TALON_PID_SLOT, KD, TIMEOUT_MS);
-        shooterMaster.config_kF(TALON_PID_SLOT, KF, TIMEOUT_MS);
+        shooterMaster.config_kP(TALON_PID_SLOT, KP, TALON_TIMEOUT);
+        shooterMaster.config_kI(TALON_PID_SLOT, KI, TALON_TIMEOUT);
+        shooterMaster.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT);
+        shooterMaster.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
         shooterMaster.setInverted(IS_MASTER_INVERTED);
         shooterMaster.configVoltageCompSaturation(12);
         shooterMaster.enableVoltageCompensation(true);
