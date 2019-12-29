@@ -38,7 +38,7 @@ public class Turret extends Subsystem {
         master.setInverted(IS_MASTER_INVERTED);
         master.setSensorPhase(IS_SENSOR_PHASED);
         master.configPeakCurrentLimit(MAX_CURRENT);
-        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
+//        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
         master.setSelectedSensorPosition((int) HALL_EFFECT_POSITION, 0, TALON_TIMEOUT);
     }
 
@@ -68,8 +68,8 @@ public class Turret extends Subsystem {
     @Override
     public void periodic() {
         System.out.println("the current angle is " + getAngle());
-        if (getHallEffect())
-            adjustEncoderPosition();
+//        if (getHallEffect())
+//            adjustEncoderPosition();
 //        updateConstants();
         SmartDashboard.putNumber("ANGLE", getAngle());
     }

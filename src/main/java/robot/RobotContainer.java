@@ -56,6 +56,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return new TurnTurret(54);
+        return new TurnTurret(270);
     }
 }
