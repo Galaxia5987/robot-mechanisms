@@ -8,6 +8,7 @@
 package robot;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,7 +27,7 @@ import robot.subsystems.turret.Turret;
  */
 public class Robot extends TimedRobot {
     public static final NetworkTable shooterTable = NetworkTableInstance.getDefault().getTable("shooter");
-
+    public static NetworkTable visionTable = NetworkTableInstance.getDefault().getTable("vision");
     // The robot's subsystems
     public static final Drivetrain m_drivetrain = new Drivetrain();
     public static final Shooter shooter = new Shooter();
