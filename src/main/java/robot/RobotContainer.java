@@ -55,6 +55,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return new Shoot(TARGET_DISTANCE);
-    }
+    return new Shoot(TARGET_DISTANCE);
+}
 }

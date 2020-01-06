@@ -24,9 +24,11 @@ public class Shooter extends Subsystem {
         shooterMaster.config_kD(TALON_PID_SLOT, KD, TALON_TIMEOUT);
         shooterMaster.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
         shooterMaster.setInverted(IS_MASTER_INVERTED);
+        shooterMaster.setSensorPhase(MASTER_SENSOR_PHASED);
         shooterMaster.configVoltageCompSaturation(12);
         shooterMaster.enableVoltageCompensation(true);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
+        shooterSlave.setSensorPhase(SLAVE_SENSOR_PHASED);
         shooterSlave.configVoltageCompSaturation(12);
         shooterSlave.enableVoltageCompensation(true);
 //        shooterMaster.configPeakCurrentLimit(MAX_CURRENT);

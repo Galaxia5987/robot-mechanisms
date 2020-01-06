@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * This is a temporary subsystem from last year.
  */
 public class Drivetrain extends Subsystem {
-
+    // TODO: change motor ports
     public TalonSRX leftMaster = new TalonSRX(16);
     public TalonSRX rightMaster = new TalonSRX(11);
     public VictorSPX right1 = new VictorSPX(12);

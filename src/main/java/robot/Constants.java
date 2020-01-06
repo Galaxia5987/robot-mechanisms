@@ -27,6 +27,8 @@ public class Constants {
         public static final int TALON_TIMEOUT = 20;
         public static final boolean IS_MASTER_INVERTED = true;
         public static final boolean IS_SLAVE_INVERTED = true;
+        public static final boolean SLAVE_SENSOR_PHASED = true;
+        public static final boolean MASTER_SENSOR_PHASED = true;
         public static final int MAX_CURRENT = 35; //[A]
         public static final double TICKS_PER_METER = 36 / (2 * 0.05 * Math.PI);
         public static final double TICKS_PER_ROTATION = 36;
@@ -36,7 +38,8 @@ public class Constants {
         public static final double g = 9.80665; // [m/sec^2]
         public static final double TARGET_DISTANCE = 2; // [m]
         public static final double SHOOTING_TIME = 3.5;
-        public static final double TARGET_VELOCITY = 650;
+        public static final double TARGET_VELOCITY = 2300;
+        public static final double PERCENT_THRESHOLD = 0.05;
     }
 
     public static class ExampleSubsystem1 {
