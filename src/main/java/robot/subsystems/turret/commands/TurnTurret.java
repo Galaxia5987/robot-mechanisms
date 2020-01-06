@@ -1,6 +1,7 @@
 package robot.subsystems.turret.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import robot.subsystems.turret.ControlMode;
 
 import static robot.Constants.Turret.ANGLE_THRESHOLD;
 import static robot.Robot.turret;
@@ -21,6 +22,7 @@ public class TurnTurret extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        turret.setControlMode(ControlMode.ANGLE_CONTROL);
         startAngle = turret.getAngle();
         turret.setTargetAngle(angle);
     }
