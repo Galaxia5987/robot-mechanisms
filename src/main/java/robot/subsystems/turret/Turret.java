@@ -5,10 +5,14 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.Robot;
 
 import static robot.Constants.Turret.*;
+import static robot.Constants.VisionTurret.*;
 import static robot.Ports.Turret.*;
 
 /**
@@ -22,6 +26,10 @@ import static robot.Ports.Turret.*;
  */
 public class Turret extends Subsystem {
     private TalonSRX master = new TalonSRX(MASTER);
+    private NetworkTableEntry visionAngle = Robot.visionTable.getEntry("angle");
+    private double targetAngle = 180;
+    private double speed = 0;
+    private robot.subsystems.turret.ControlMode controlMode;
 
     /**
      * configures the encoder and PID constants.
@@ -65,6 +73,15 @@ public class Turret extends Subsystem {
         }
     }
 
+    public void updateVisionConstants() {
+        if (VISION_KP != getConstant("visionKP", VISION_KP) || VISION_KI != getConstant("visionKI", VISION_KI) || VISION_KD != getConstant("visionKD", VISION_KD))
+        {
+            VISION_KP = getConstant("visionKP", VISION_KP);
+            VISION_KI = getConstant("visionKI", VISION_KI);
+            VISION_KD = getConstant("visionKD", VISION_KD);
+        }
+    }
+
     @Override
     public void periodic() {
         System.out.println("the current angle is " + getAngle());
@@ -72,6 +89,13 @@ public class Turret extends Subsystem {
 //            adjustEncoderPosition();
 //        updateConstants();
         SmartDashboard.putNumber("ANGLE", getAngle());
+        updateVisionConstants();
+        if(controlMode == robot.subsystems.turret.ControlMode.ANGLE_CONTROL) {
+            moveTurret(targetAngle);
+        }
+        else if(controlMode == robot.subsystems.turret.ControlMode.SPEED_CONTROL) {
+            updateTurretSpeed();
+        }
     }
 
     /**
@@ -84,18 +108,27 @@ public class Turret extends Subsystem {
     }
 
     /**
+     *
+     */
+    public double getVisionAngle(){
+        return visionAngle.getDouble(0);
+    }
+
+    /**
      * change the angle to the desired angle,
      * if you would like to use the same Direction.
      * the value can be between 0 to 360 degrees.
      *
-     * @param targetAngle the desired angle.
+     * @param newTargetAngle the desired angle.
      */
-    public void setTargetAngle(double targetAngle) {
-        targetAngle = (targetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
-        targetAngle = constrain(MINIMUM_ANGLE, targetAngle, MAXIMUM_ANGLE);
-        moveTurret(targetAngle);
+    public void setTargetAngle(double newTargetAngle) {
+        newTargetAngle = (newTargetAngle + 720) % 360; //To insure that the targetAngle is between 0-360, we add 720 to prevent negative modulo operations.
+        this.targetAngle = constrain(MINIMUM_ANGLE, newTargetAngle, MAXIMUM_ANGLE);
     }
 
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     /**
      * applying power to the controller for moving the turret.
@@ -104,6 +137,10 @@ public class Turret extends Subsystem {
      */
     private void moveTurret(double angle) {
         master.set(ControlMode.MotionMagic, convertDegreesToTicks(angle));
+    }
+
+    public void updateTurretSpeed() {
+        master.set(ControlMode.PercentOutput, this.speed);
     }
 
     public void stop() {
@@ -150,5 +187,9 @@ public class Turret extends Subsystem {
 
     public void reset() {
         master.setSelectedSensorPosition(0);
+    }
+
+    public void setControlMode(robot.subsystems.turret.ControlMode controlMode) {
+        this.controlMode = controlMode;
     }
 }
