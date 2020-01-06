@@ -56,4 +56,12 @@ public class Constants {
         public static final double MAXIMUM_ANGLE = 350;
         public static final double MINIMUM_ANGLE = 0;
     }
+    public static class VisionTurret {
+
+        public static final double VISION_ANGLE_THRESHOLD = 0.5;
+        // TODO: Change vision PID values
+        public static double VISION_KP = 0;
+        public static double VISION_KI = 0;
+        public static double VISION_KD = 0;
+    }
 }
