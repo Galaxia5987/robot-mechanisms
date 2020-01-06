@@ -1,4 +1,6 @@
 package robot.subsystems.turret;
 
-public class ControlMode {
+public enum ControlMode {
+    SPEED_CONTROL,
+    ANGLE_CONTROL
 }
