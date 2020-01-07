@@ -25,6 +25,7 @@ public class Shooter extends Subsystem {
         shooterMaster.config_kF(TALON_PID_SLOT, KF, TALON_TIMEOUT);
         shooterMaster.setInverted(IS_MASTER_INVERTED);
         shooterMaster.setSensorPhase(MASTER_SENSOR_PHASED);
+        shooterMaster.configClosedloopRamp(RAMP_RATE);
         shooterMaster.configVoltageCompSaturation(12);
         shooterMaster.enableVoltageCompensation(true);
         shooterSlave.setInverted(IS_SLAVE_INVERTED);
@@ -37,14 +38,14 @@ public class Shooter extends Subsystem {
     }
 
     public double getSpeed() {
-        return shooterMaster.getSelectedSensorVelocity() * 10;
+        return ticksToRPM(shooterMaster.getSelectedSensorVelocity());
     }
 
     /**
-     * @param speed
+     * @param rpm
      */
-    public void setSpeed(double speed) {
-        shooterMaster.set(ControlMode.Velocity, speed); // TODO: Convert between m/s to native sensor units/100ms
+    public void setSpeedRPM(double rpm) {
+        shooterMaster.set(ControlMode.Velocity, ticksToRPM(rpm));
     }
 
     public void setInputSpeed(double inputSpeed){
@@ -55,6 +56,13 @@ public class Shooter extends Subsystem {
         return shooterMaster.getSelectedSensorPosition();
     }
 
+    public double ticksToRPM(double ticks) {
+        return (ticks * TICKS_PER_ROTATION * 10) / 60;
+    }
+
+    public double rpmToTicks(double rpm) {
+        return TICKS_PER_ROTATION * 10 * (rpm / 60);
+    }
 
     @Override
     protected void initDefaultCommand() {
