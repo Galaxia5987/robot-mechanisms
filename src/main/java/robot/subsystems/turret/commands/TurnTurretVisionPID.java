@@ -36,6 +36,7 @@ public class TurnTurretVisionPID extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(turret.getVisionAngle()) <= VISION_ANGLE_THRESHOLD;
+//        return Math.abs(turret.getVisionAngle()) <= VISION_ANGLE_THRESHOLD;
+        return false;
     }
 }

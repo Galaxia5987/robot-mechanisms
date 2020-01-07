@@ -13,7 +13,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import robot.subsystems.drivetrain.Drivetrain;
+//import robot.subsystems.drivetrain.Drivetrain;
 import robot.subsystems.shooter.Shooter;
 import robot.subsystems.turret.Turret;
 
@@ -27,9 +27,9 @@ import robot.subsystems.turret.Turret;
  */
 public class Robot extends TimedRobot {
     public static final NetworkTable shooterTable = NetworkTableInstance.getDefault().getTable("shooter");
-    public static NetworkTable visionTable = NetworkTableInstance.getDefault().getTable("vision");
+    public static NetworkTable visionTable = NetworkTableInstance.getDefault().getTable("chameleon-vision").getSubTable("ps3");
     // The robot's subsystems
-    public static final Drivetrain m_drivetrain = new Drivetrain();
+//    public static final Drivetrain m_drivetrain = new Drivetrain();
     public static final Shooter shooter = new Shooter();
     public static final Turret turret = new Turret();
     //public static final Elevator m_elevator = new Elevator();

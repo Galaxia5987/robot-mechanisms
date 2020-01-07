@@ -60,8 +60,8 @@ public class Constants {
 
         public static final double VISION_ANGLE_THRESHOLD = 0.5;
         // TODO: Change vision PID values
-        public static double VISION_KP = 0;
+        public static double VISION_KP = 0.03;
         public static double VISION_KI = 0;
-        public static double VISION_KD = 0;
+        public static double VISION_KD = 0.04;
     }
 }

@@ -26,10 +26,10 @@ import static robot.Ports.Turret.*;
  */
 public class Turret extends Subsystem {
     private TalonSRX master = new TalonSRX(MASTER);
-    private NetworkTableEntry visionAngle = Robot.visionTable.getEntry("angle");
+    private NetworkTableEntry visionAngle = Robot.visionTable.getEntry("yaw");
     private double targetAngle = 180;
     private double speed = 0;
-    private robot.subsystems.turret.ControlMode controlMode;
+    private robot.subsystems.turret.ControlMode controlMode = robot.subsystems.turret.ControlMode.ANGLE_CONTROL;
 
     /**
      * configures the encoder and PID constants.
@@ -46,7 +46,7 @@ public class Turret extends Subsystem {
         master.setInverted(IS_MASTER_INVERTED);
         master.setSensorPhase(IS_SENSOR_PHASED);
         master.configPeakCurrentLimit(MAX_CURRENT);
-//        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
+        master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.Disabled);
         master.setSelectedSensorPosition((int) HALL_EFFECT_POSITION, 0, TALON_TIMEOUT);
     }
 
@@ -90,12 +90,15 @@ public class Turret extends Subsystem {
 //        updateConstants();
         SmartDashboard.putNumber("ANGLE", getAngle());
         updateVisionConstants();
-        if(controlMode == robot.subsystems.turret.ControlMode.ANGLE_CONTROL) {
-            moveTurret(targetAngle);
-        }
-        else if(controlMode == robot.subsystems.turret.ControlMode.SPEED_CONTROL) {
+//        if(controlMode == robot.subsystems.turret.ControlMode.ANGLE_CONTROL) {
+//            moveTurret(targetAngle);
+//        }
+        if(controlMode == robot.subsystems.turret.ControlMode.SPEED_CONTROL) {
+            System.out.println(speed);
             updateTurretSpeed();
+
         }
+
     }
 
     /**
