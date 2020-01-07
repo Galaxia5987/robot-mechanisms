@@ -38,8 +38,8 @@ public class Constants {
         public static final double g = 9.80665; // [m/sec^2]
         public static final double TARGET_DISTANCE = 2; // [m]
         public static final double SHOOTING_TIME = 3.5;
-        public static final double TARGET_RPM = 400;
-        public static final double PERCENT_THRESHOLD = 0.05;
+        public static final double TARGET_RPM = 500;
+        public static final double PERCENT_THRESHOLD = 10;
         public static final double RAMP_RATE = 2;
     }
 
