@@ -58,7 +58,7 @@ public class Shoot extends Command {
     }
 
     private double calculateVelocity(double distance) {
-        return (458.22 * Math.exp(0.2559 * distance)) * (4.0 / 5);
+        return (520.78 * Math.exp(0.1685 * distance));
     }
 
     // Make this return true when this Command no longer needs to run execute()
