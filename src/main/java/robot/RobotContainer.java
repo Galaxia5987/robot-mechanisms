@@ -13,8 +13,14 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import robot.subsystems.drivetrain.Drivetrain;
-import robot.subsystems.drivetrain.commands.DriveStraight;
+//import robot.subsystems.drivetrain.Drivetrain;
+//import robot.subsystems.drivetrain.commands.DriveStraight;
+import robot.subsystems.shooter.commands.Shoot;
+import robot.subsystems.turret.commands.TurnTurret;
+import robot.subsystems.turret.commands.TurnTurretVision;
+import robot.subsystems.turret.commands.TurnTurretVisionPID;
+
+import static robot.Constants.Shooter.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,18 +36,18 @@ public class RobotContainer {
 
     public RobotContainer(){
         configureButtonBindings();
-
+        x.whileHeld(new Shoot(TARGET_DISTANCE));
         //m_chooser.addOption("Example Auto 1", new DriveStraight());
         //m_chooser.addOption("Example Auto 2", new ExampleCommand());
         //m_chooser.setDefaultOption();
-        Shuffleboard.getTab("Autonomous").add(m_chooser);
+//        Shuffleboard.getTab("Autonomous").add(m_chooser);
     }
 
 
 
     private void configureButtonBindings() {
         // Grab the hatch when the 'A' button is pressed.
-        new JoystickButton(xbox,1).whenPressed(new DriveStraight(0.5));
+//        new JoystickButton(xbox,1).whenPressed(new DriveStraight(0.5));
         //new JoystickButton(m_driverController, Button.kB.value).whenPressed(new ExampleCommand());
     }
 
@@ -52,6 +58,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomous() {
-        return m_chooser.getSelected();
+        return new TurnTurretVisionPID();
+//        return null;
     }
 }
