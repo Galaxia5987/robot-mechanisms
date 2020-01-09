@@ -42,7 +42,7 @@ public class Shoot extends Command {
         // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
         SmartDashboard.putNumber("shooterRPM", SmartDashboard.getNumber("shooterRPM", TARGET_RPM));
         shooter.setSpeedRPM(SmartDashboard.getNumber("shooterRPM", TARGET_RPM));
-        System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
+        System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(calculateDistance(TARGET_DISTANCE)));
         setNetworkTable();
         if (100 - ((shooter.getSpeed() / TARGET_RPM) * 100) <= PERCENT_THRESHOLD){
             shooter.setInputSpeed(0.5);
@@ -59,6 +59,12 @@ public class Shoot extends Command {
 
     private double calculateVelocity(double distance) {
         return (520.78 * Math.exp(0.1685 * distance));
+    }
+
+    private double calculateDistance(double TARGET_DISTANCE){
+        double velocity = (-g*Math.pow(TARGET_DISTANCE, 2))/2*Math.pow(Math.cos(Math.toRadians(ANGLE)),2)*(TARGET_HEIGHT-SHOOTER_HEIGHT-TARGET_DISTANCE*Math.tan(Math.toRadians(ANGLE)));
+        double correctionDistance = SHOOTER_HEIGHT / Math.tan(Math.toRadians(ANGLE));
+        return (velocity * Math.sin(2*Math.toRadians(ANGLE)))/g + correctionDistance;
     }
 
     // Make this return true when this Command no longer needs to run execute()
