@@ -8,7 +8,8 @@ package robot;
 public class Ports {
     public static class Shooter {
         public static final int MASTER = 7;
-        public static final int SLAVE = 8;
+        public static final int SLAVE = 15;
+        public static final int INPUT_MOTOR = 10;
     }
 
     public static class Turret {

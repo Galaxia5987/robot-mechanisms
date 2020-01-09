@@ -3,9 +3,12 @@ package robot.subsystems.shooter.commands;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static robot.Robot.shooter;
 import static robot.Robot.shooterTable;
+import static robot.Constants.Shooter.*;
 
 /**
  *
@@ -37,9 +40,16 @@ public class Shoot extends Command {
     @Override
     protected void execute() {
         // shooter.setSpeed((calculateInitialVelocity(distance) / RADIUS) * TICKS_PER_METER); // Convert from linear velocity to radial velocity: v = wr.
-        shooter.setSpeed(calculateVelocity(distance));
+        SmartDashboard.putNumber("shooterRPM", SmartDashboard.getNumber("shooterRPM", TARGET_RPM));
+        shooter.setSpeedRPM(SmartDashboard.getNumber("shooterRPM", TARGET_RPM));
         System.out.println(shooter.getSpeed() + ", calculated speed " + calculateVelocity(distance));
         setNetworkTable();
+        if (100 - ((shooter.getSpeed() / TARGET_RPM) * 100) <= PERCENT_THRESHOLD){
+            shooter.setInputSpeed(0.5);
+        }
+        else {
+            shooter.setInputSpeed(0);
+        }
 //        System.out.println(shooter.getPosition());
     }
 
@@ -61,6 +71,8 @@ public class Shoot extends Command {
     @Override
     protected void end() {
         timer.stop();
+        shooter.setSpeedRPM(0);
+        shooter.setInputSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
