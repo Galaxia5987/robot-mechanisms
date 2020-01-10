@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * This is a temporary subsystem from last year.
  */
 public class Drivetrain extends Subsystem {
-
+    // TODO: change motor ports
     public TalonSRX leftMaster = new TalonSRX(16);
     public TalonSRX rightMaster = new TalonSRX(11);
     public VictorSPX right1 = new VictorSPX(12);
@@ -18,12 +18,12 @@ public class Drivetrain extends Subsystem {
     public VictorSPX left2 = new VictorSPX(15);
 
     public Drivetrain() {
-        leftMaster.setInverted(true);
-        left1.setInverted(true);
-        left2.setInverted(true);
+        leftMaster.setInverted(false);
+        left1.setInverted(false);
+        left2.setInverted(false);
         rightMaster.setInverted(false);
         right1.setInverted(false);
-        right2.setInverted(false);
+        right2.setInverted(true);
 
         right1.follow(rightMaster);
         right2.follow(rightMaster);
